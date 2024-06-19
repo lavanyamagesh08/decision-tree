@@ -1,0 +1,26 @@
+pip install pandas
+import pandas as u
+import numpy as np
+data =u.read_csv("C:\\Users\\Lenovo\\Downloads\\android-games.csv")
+data
+X = data.drop('total ratings', axis=1)
+X
+y = data['total ratings']
+y
+dummi=u.get_dummies(data.drop("installs", axis=1))
+dummi
+X = u.get_dummies(data.drop("installs", axis=1), drop_first=True)
+y = data["installs"]
+from sklearn.tree import DecisionTreeClassifier
+model = DecisionTreeClassifier()
+model.fit(X, y)
+pred = model.predict(X)
+pred
+from sklearn.tree import plot_tree
+plot_tree(model, feature_names=X.columns, filled=True);
+pred= model.predict(X)
+df =u.DataFrame({'Actual': y, 'Predicted':pred})
+df
+from sklearn.metrics import classification_report, confusion_matrix
+print(confusion_matrix(y, pred))
+print(classification_report(y, pred))
